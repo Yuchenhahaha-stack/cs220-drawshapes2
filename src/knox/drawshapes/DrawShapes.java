@@ -363,7 +363,7 @@ public class DrawShapes extends JFrame
      */
     public static void main(String[] args)
     {
-        DrawShapes shapes=new DrawShapes(700, 600);
+        DrawShapes shapes=new DrawShapes(700, 800);
         shapes.setVisible(true);
     }
 
