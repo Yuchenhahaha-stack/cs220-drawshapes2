@@ -28,7 +28,7 @@ public class DrawShapes extends JFrame
     private enum ShapeType {
         SQUARE,
         CIRCLE,
-        RECTANGLE
+        RECTANGLE,
     }
     
     private DrawShapesPanel shapePanel;
@@ -90,6 +90,7 @@ public class DrawShapes extends JFrame
                                 200,
                                 color));
                     }
+                    
                     
                 } else if (e.getButton()==MouseEvent.BUTTON2) {
                     // apparently this is middle click
@@ -249,7 +250,7 @@ public class DrawShapes extends JFrame
                 color = Color.BLUE;
             }
         });
-        
+        //Green Color
         addToMenu(colorMenu, "Green", new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String text=e.getActionCommand();
@@ -258,6 +259,16 @@ public class DrawShapes extends JFrame
                 color = Color.GREEN;
             }
         });
+        
+        addToMenu(colorMenu, "Black", new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String text=e.getActionCommand();
+                System.out.println(text);
+                // change the color instance variable to blue
+                color = Color.BLACK;
+            }
+        });
+        
         // shape menu
         JMenu shapeMenu = new JMenu("Shape");
         menuBar.add(shapeMenu);
@@ -306,15 +317,23 @@ public class DrawShapes extends JFrame
         });
         
         // move option
-        addToMenu(operationModeMenu, "Move", new ActionListener() {
+        addToMenu(operationModeMenu, "Move Right", new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String text=e.getActionCommand();
-                // currently this just prints
-                System.out.println(text);
+                scene.moveSelected(300, 0);
+                System.out.println(text+", 300 units right");
+                repaint();
             }
         });
         
-
+        addToMenu(operationModeMenu, "Delete", new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String text=e.getActionCommand();
+                System.out.println(text);
+                scene.removeSelected();
+                repaint();
+            }
+        });
         // set the menu bar for this frame
         this.setJMenuBar(menuBar);
     }
@@ -366,5 +385,4 @@ public class DrawShapes extends JFrame
         DrawShapes shapes=new DrawShapes(700, 800);
         shapes.setVisible(true);
     }
-
 }

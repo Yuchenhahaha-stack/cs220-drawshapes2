@@ -61,6 +61,6 @@ public class Rectangle extends AbstractShape
 		this.width = (int)(this.width * factor);
 		this.height = (int)(this.height * factor);
 	}
-    
+	
 
 }
