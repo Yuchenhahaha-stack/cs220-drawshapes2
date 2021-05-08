@@ -29,6 +29,7 @@ public class DrawShapes extends JFrame
         SQUARE,
         CIRCLE,
         RECTANGLE,
+        TRIANGLE,
     }
     
     private DrawShapesPanel shapePanel;
@@ -88,6 +89,12 @@ public class DrawShapes extends JFrame
                                 e.getPoint(),
                                 100, 
                                 200,
+                                color));
+                    }
+                    else if (shapeType == ShapeType.TRIANGLE) {
+                        scene.addShape(new Triangle(
+                                e.getPoint(),
+                                100, 
                                 color));
                     }
                     
@@ -289,6 +296,14 @@ public class DrawShapes extends JFrame
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Circle");
                 shapeType = ShapeType.CIRCLE;
+            }
+        });
+        
+        addToMenu(shapeMenu, "Triangle", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Triangle");
+                shapeType = ShapeType.TRIANGLE;
             }
         });
         

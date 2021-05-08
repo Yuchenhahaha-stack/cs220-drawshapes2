@@ -7,20 +7,13 @@ import java.awt.Point;
 public class Triangle extends AbstractShape
 {
     protected int width;
-    protected int height;
     
-    public Triangle(Point center, int width, int height, Color color){
+    public Triangle(Point center, int width, Color color){
     	super(new Point(center.x, center.y), color);
-        boundingBox = new BoundingBox(center.x - width/2, center.x + width/2, center.y - height/2, center.y + height/2);
+        boundingBox = new BoundingBox(center.x, center.x + width, center.y, center.y + width);
         this.width = width;
-        this.height = height;
     }
     
-    public Triangle(int left, int right, int top, int bottom) {
-    	this(new Point(right - (right-left)/2, bottom - (bottom-top)/2),
-    			right - left, bottom - top, Color.BLUE);
-    }
-
     /* (non-Javadoc)
      * @see drawshapes.sol.Shape#draw(java.awt.Graphics)
      */
@@ -31,27 +24,25 @@ public class Triangle extends AbstractShape
         } else {
             g.setColor(getColor());
         }
-        g.fillRect(getAnchorPoint().x - width/2, 
-        		getAnchorPoint().y - height/2, 
-        		width, height);
+        int [] x = {getAnchorPoint().x, getAnchorPoint().x+width/2, getAnchorPoint().x+width};
+        int [] y = {getAnchorPoint().y, getAnchorPoint().y+width, getAnchorPoint().y};
+        g.fillPolygon(x,y,3);
     }
 
     public String toString() {
-        return String.format("RECTANGLE (%d, %d) width=%d height=%d color=%s selected? %s", 
+        return String.format("Triangle (%d, %d) width=%d height=%d color=%s selected? %s", 
                 getAnchorPoint().x,
                 getAnchorPoint().y,
                 width,
-                height,
                 Util.colorToString(getColor()),
                 selected);
     }
     
     public String encode() {
-    	return String.format("RECTANGLE %d %d %d %d %s %s", 
+    	return String.format("Triangle %d %d %d %d %s %s", 
                 getAnchorPoint().x,
                 getAnchorPoint().y,
                 width,
-                height,
                 Util.colorToString(getColor()),
                 selected);
     }
@@ -59,7 +50,6 @@ public class Triangle extends AbstractShape
 	@Override
 	public void scale(double factor) {
 		this.width = (int)(this.width * factor);
-		this.height = (int)(this.height * factor);
 	}
 	
 
